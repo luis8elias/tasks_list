@@ -1,16 +1,20 @@
 # task_list
 
-A new Flutter project.
+## Getting Started.
 
-## Getting Started
+Run this command :
 
-This project is a starting point for a Flutter application.
+`flutter pub get`
 
-A few resources to get you started if this is your first Flutter project:
+create a env file with this command : 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+`copy .env.example .env`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+fill .env variables
+
+~~~
+APP_NAME= 
+API_URL=
+~~~
+
+run the app
