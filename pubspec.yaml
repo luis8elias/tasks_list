@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   animate_do: ^3.0.2
+  another_flushbar: ^1.12.29
   cupertino_icons: ^1.0.2
   dio: ^4.0.6
   flutter:

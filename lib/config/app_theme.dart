@@ -83,8 +83,8 @@ final theme = ThemeData(
   ),
 );
 
-class AlertColors {
-  AlertColors._();
+class StatusColors {
+  StatusColors._();
 
   static const Color success = Color(0xff0661F1);
   static const Color warning = Color(0xffff9f43);
