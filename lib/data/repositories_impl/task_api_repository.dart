@@ -58,9 +58,37 @@ class TaskApiRepository extends ITaskRepository{
   }
 
   @override
-  Future<ApiResponse> delete({required int taskId}) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<ApiResponse> delete({required int taskId}) async{
+    try{
+
+      final response = await dioInstance.delete(
+        "/tasks-challenge/tasks/$taskId",
+      );
+
+      final responseBody = response.data as Map<String,dynamic>;
+
+      if(responseBody.containsKey('content')){
+        return ApiResponse(
+          success: false,
+          detail: responseBody['detail'],
+        );
+
+      }
+
+      return ApiResponse(
+        success: true,
+        detail: responseBody['detail'],
+      );
+
+    } catch (e) {
+
+      log('🤡 $e');
+      log('🙄 Error [class=TaskApiRepository][method=delete]');
+      return ApiResponse(
+        success: false,
+        detail: 'Ocurrió un error al borrar la tarea'
+      );
+    }
   }
 
   @override

@@ -36,10 +36,9 @@ class DeleteTaskPrivider extends ChangeNotifier{
   }
 
   Future<void> deleteTask(int taskId) async {
-    //final deleteTaskResp = await _taskRepository.delete(taskId: taskId);
+    
     _emitStatus(DeleteTaskStatus.loading);
-    await Future.delayed(const Duration(seconds: 3));
-    final deleteTaskResp = ApiResponse(success: true, detail: 'Borrado Existoso');
+    final deleteTaskResp = await _taskRepository.delete(taskId: taskId);
     message = deleteTaskResp.detail!;
 
     if(deleteTaskResp.isFailed){
