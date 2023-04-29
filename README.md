@@ -15,6 +15,7 @@ fill .env variables
 ~~~
 APP_NAME= 
 API_URL=
+API_KEY=
 ~~~
 
 run the app
