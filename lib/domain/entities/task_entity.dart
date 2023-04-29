@@ -12,6 +12,10 @@ class TaskEntity {
     required this.dueDate,
   });
 
+  bool get isCompletedAsBool => isCompleted == 1;
+  bool get isNotCompleted => isCompleted == 0;
+  
+
   factory TaskEntity.fromJson(Map<String, dynamic> json) => TaskEntity(
     id: json["id"],
     title: json["title"],
