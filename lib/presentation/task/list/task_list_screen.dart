@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:provider/provider.dart';
 
+import '/presentation/task/list/widgets/task_tile.dart';
 import '/presentation/task/list/providers/delete_task_provider.dart';
-import '/presentation/task/list/widgets/task_list_view.dart';
 import '/presentation/task/list/widgets/tasks_tab_bar.dart';
 import '/config/size_constants.dart';
 import '/presentation/shared/loader_widget.dart';
@@ -20,7 +20,6 @@ class TaskListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-
         ChangeNotifierProvider(
           create: (context) => TaskListProvider(
             taskRepository: Injector.appInstance.get()
@@ -67,19 +66,26 @@ class TaskListScreenBuilder extends StatelessWidget {
           )
         ],
       ),
-      body: Consumer<TaskListProvider>(
-        builder: (context, prov, child) {
-
-          if(prov.status == TaskListStatus.loading){
-            return const LoaderWidget();
-          }
-
-          if(prov.status == TaskListStatus.failed){
-            return Center(child: Text(prov.message));
-          }
+      body: Column(
+        children: [
+          const TasksTabBar(),
+          Expanded(
+            child: Consumer<TaskListProvider>(
+              builder: (context, prov, child) {
           
-          return const TaskListScreenUI();
-        },
+                if(prov.status == TaskListStatus.loading){
+                  return const LoaderWidget();
+                }
+          
+                if(prov.status == TaskListStatus.failed){
+                  return Center(child: Text(prov.message));
+                }
+                
+                return const TaskListScreenUI();
+              },
+            ),
+          )
+        ],
       )
     );
   }
@@ -92,13 +98,24 @@ class TaskListScreenUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        TasksTabBar(),
-        Expanded(
-          child: TasksListView()
-        )
-      ],
+    return RefreshIndicator(
+      onRefresh: () async{
+        context.read<TaskListProvider>().fetchTaskList();
+      },
+      color: Theme.of(context).primaryColor,
+      child: GlowingOverscrollIndicator(
+        axisDirection: AxisDirection.down,
+        color: Theme.of(context).colorScheme.onSecondary,
+        child: ListView.builder( 
+          itemCount: context.select<TaskListProvider,int>((p) => p.filteredTasks.length),
+          itemBuilder: (context, index) {
+            final tasks = context.read<TaskListProvider>().filteredTasks;
+            return  TaskTile(
+              task: tasks[index],
+            );
+          },
+        ),
+      ),
     );
   }
 }

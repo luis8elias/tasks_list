@@ -36,14 +36,29 @@ class TaskListProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  _updateCounts(){
+  _updateTasksCounts(){
     completedTaskCount = tasks.where((element) => element.isCompletedAsBool).length;
     notCompletedTaskCount = tasks.length - completedTaskCount;
+  }
+
+  List<TaskEntity> _filterTasks(List<TaskEntity> taskToFilter){
+
+    if(taskFilter == TaskFilter.completed){
+      return taskToFilter.where((element) => element.isCompletedAsBool).toList();
+    }
+
+    if(taskFilter == TaskFilter.notCompleted){
+      return taskToFilter.where((element) => element.isNotCompleted).toList();
+    }
+
+    return taskToFilter;
+
   }
   
 
   Future<void> fetchTaskList() async {
     
+    _emitStatus(TaskListStatus.loading);
     final fetchTasksResponse = await _taskRepository.getList();
     if(fetchTasksResponse.isFailed){
 
@@ -54,8 +69,8 @@ class TaskListProvider with ChangeNotifier {
     }
 
     tasks = fetchTasksResponse.content!;
-    filteredTasks = fetchTasksResponse.content!;
-    _updateCounts();
+    filteredTasks = _filterTasks(fetchTasksResponse.content!);
+    _updateTasksCounts();
     _emitStatus(TaskListStatus.success);
 
   }
@@ -63,21 +78,8 @@ class TaskListProvider with ChangeNotifier {
   void changeTaskFilter(TaskFilter newTaskFilter){
 
     if(newTaskFilter == taskFilter) return;
-
     taskFilter = newTaskFilter;
-
-    if(newTaskFilter == TaskFilter.all){
-      filteredTasks = tasks;
-    }
-
-    if(newTaskFilter == TaskFilter.completed){
-      filteredTasks = tasks.where((element) => element.isCompletedAsBool).toList();
-    }
-
-    if(newTaskFilter == TaskFilter.notCompleted){
-      filteredTasks = tasks.where((element) => element.isNotCompleted).toList();
-    }
-
+    filteredTasks = _filterTasks(tasks);
     _emitStatus(TaskListStatus.success);
 
   }
@@ -89,7 +91,7 @@ class TaskListProvider with ChangeNotifier {
       (task) => task.id == taskId,
     );
     filteredTasks = tasks;
-    _updateCounts();
+    _updateTasksCounts();
     _emitStatus(TaskListStatus.success);
 
   }
