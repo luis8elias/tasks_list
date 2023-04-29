@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +31,7 @@ class DeleteTaskDialog extends StatelessWidget {
                 color: Theme.of(context).primaryColorLight,
               ),
               flushbarStyle: FlushbarStyle.GROUNDED,
-              backgroundColor: Theme.of(context).primaryColor,
+              backgroundColor: StatusColors.success,
               flushbarPosition: FlushbarPosition.TOP,
               duration: const  Duration(seconds: 3),
             ).show(context);
@@ -43,11 +41,20 @@ class DeleteTaskDialog extends StatelessWidget {
           return const SizedBox.shrink();
         }
         if(prov.status  == DeleteTaskStatus.failed){
-          log('😐');
-          /* CustomAlert.showErrorOnlyTitle(
-            context: context,
-            title: state.message
-          ); */
+
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Flushbar(
+              message : prov.message,
+              icon: Icon(
+                Icons.error,
+                color: Theme.of(context).primaryColorLight,
+              ),
+              flushbarStyle: FlushbarStyle.GROUNDED,
+              backgroundColor: StatusColors.error,
+              flushbarPosition: FlushbarPosition.TOP,
+              duration: const  Duration(seconds: 3),
+            ).show(context);
+          });
           Navigator.of(context).pop();
           return const SizedBox.shrink();
         }
@@ -134,7 +141,7 @@ class DeleteTaskDialogButton extends StatelessWidget {
       style: ButtonStyle(
         enableFeedback: true,
         overlayColor: MaterialStatePropertyAll(
-          Theme.of(context).hintColor.withOpacity(0.1)
+          Theme.of(context).highlightColor
         ),
        
         shape: MaterialStatePropertyAll(
