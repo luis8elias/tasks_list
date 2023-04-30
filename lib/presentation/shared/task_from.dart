@@ -119,7 +119,7 @@ class _TaskFormState extends State<TaskForm> {
                   CustomCheckBox(
                     isCheked: false,
                     onChanged: (value) {
-                      log('$value 🤭');
+                      
                     },
                   ),
                   const SizedBox(
