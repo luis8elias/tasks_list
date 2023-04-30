@@ -58,7 +58,7 @@ class OptionsBottomSheet extends StatelessWidget {
                     context: context,
                     barrierDismissible: false,
                     builder: (BuildContext context2) {
-                      return ChangeNotifierProvider.value(
+                      return ListenableProvider.value(
                         value: context.read<TaskListProvider>(),
                         child: DeleteTaskDialog(taskId: taskId)
                       );

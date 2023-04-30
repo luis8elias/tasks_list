@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:task_list/data/models/api_response.dart';
-import 'package:task_list/domain/repositories/i_task_repository.dart';
+import '/data/models/api_response.dart';
+import '/domain/repositories/i_task_repository.dart';
 
 enum UpdateTaskStatus{
   initial,

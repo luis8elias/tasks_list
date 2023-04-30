@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:task_list/presentation/task/see/see_task_screen.dart';
+import '/presentation/task/see/see_task_screen.dart';
 
 import '/presentation/task/update/update_task_screen.dart';
 import '/presentation/task/create/create_task_screen.dart';

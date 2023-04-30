@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injector/injector.dart';
 import 'package:provider/provider.dart';
-import 'package:task_list/common/alerts.dart';
+import '/common/alerts.dart';
 import '/presentation/task/update/providers/update_task_provider.dart';
 
 import '/domain/entities/task_detailed_entity.dart';
@@ -111,8 +111,9 @@ class UpdateTaskScreenUI extends StatelessWidget {
 
           WidgetsBinding.instance.addPostFrameCallback((_) {
 
-            Navigator.pop(context);
+            
             Alerts.showSuccess(context: context, message: prov.message);
+            GoRouter.of(context).replace(TaskListScreen.routeName);
             
           });
 

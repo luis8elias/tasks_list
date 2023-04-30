@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:task_list/presentation/task/see/see_task_screen.dart';
+import '/presentation/task/see/see_task_screen.dart';
 import '/presentation/task/list/providers/task_list_provider.dart';
 
 import '/presentation/task/list/widgets/options_bottom_sheet.dart';
@@ -27,7 +27,7 @@ class TaskTile extends StatelessWidget {
       ),
       child: ListTile(
         onTap: () {
-          GoRouter.of(context).go(
+          GoRouter.of(context).push(
             context.namedLocation(
               SeeTaskScreen.routeName,
               params: {'tid': task.id.toString()}
@@ -78,7 +78,7 @@ class TaskTile extends StatelessWidget {
               borderRadius: BorderRadius.circular(kBorderRadius + 5),
             ),
             builder:(context2) {
-              return ChangeNotifierProvider.value(
+              return ListenableProvider.value(
                 value: context.read<TaskListProvider>(),
                 child: OptionsBottomSheet(
                   taskId: task.id,

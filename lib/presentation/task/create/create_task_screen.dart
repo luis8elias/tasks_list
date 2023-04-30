@@ -42,9 +42,8 @@ class CreateTaskScreenListener extends StatelessWidget {
         if(prov.status  == CreateTaskStatus.success){
 
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            Navigator.pop(context);
             Alerts.showSuccess(context: context, message: prov.message);
-            //GoRouter.of(context).go(TaskListScreen.routeName);
+            GoRouter.of(context).replace(TaskListScreen.routeName);
           });
           
         }

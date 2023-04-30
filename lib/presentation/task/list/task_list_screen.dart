@@ -18,7 +18,7 @@ class TaskListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return ChangeNotifierProvider(
+    return ListenableProvider(
       create: (context) => TaskListProvider(
         taskRepository: Injector.appInstance.get()
       )..fetchTaskList(),
