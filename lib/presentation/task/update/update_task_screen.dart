@@ -64,7 +64,7 @@ class UpdateTaskScreenBuilder extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            GoRouter.of(context).go(TaskListScreen.routeName);
+            GoRouter.of(context).pop();
           },
         ),
         title: FadeIn(

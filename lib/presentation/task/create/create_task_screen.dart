@@ -42,8 +42,8 @@ class CreateTaskScreenListener extends StatelessWidget {
         if(prov.status  == CreateTaskStatus.success){
 
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            Alerts.showSuccess(context: context, message: prov.message);
             GoRouter.of(context).replace(TaskListScreen.routeName);
+            Alerts.showSuccess(context: context, message: prov.message);
           });
           
         }
@@ -76,7 +76,7 @@ class CreateTaskScreenUI extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            GoRouter.of(context).go(TaskListScreen.routeName);
+            GoRouter.of(context).pop();
           },
         ),
         title: FadeIn(
