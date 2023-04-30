@@ -59,7 +59,7 @@ class TaskListProvider with ChangeNotifier {
   Future<void> fetchTaskList() async {
     
     _emitStatus(TaskListStatus.loading);
-    /* final fetchTasksResponse = await _taskRepository.getList();
+    final fetchTasksResponse = await _taskRepository.getList();
     if(fetchTasksResponse.isFailed){
 
       message = fetchTasksResponse.detail!;
@@ -69,7 +69,7 @@ class TaskListProvider with ChangeNotifier {
     }
 
     tasks = fetchTasksResponse.content!;
-    filteredTasks = _filterTasks(fetchTasksResponse.content!); */
+    filteredTasks = _filterTasks(fetchTasksResponse.content!);
     _updateTasksCounts();
     _emitStatus(TaskListStatus.success);
 
