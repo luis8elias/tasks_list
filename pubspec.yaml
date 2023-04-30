@@ -34,9 +34,13 @@ dependencies:
   dio: ^4.0.6
   flutter:
     sdk: flutter
+  flutter_localizations: 
+    sdk: flutter
+    version: ^0.0.0
   flutter_dotenv: ^5.0.2
   go_router: ^5.0.2
   injector: ^2.0.0
+  intl: 0.17.0
   provider: ^6.0.5
 
 

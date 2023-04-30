@@ -27,33 +27,51 @@ final theme = ThemeData(
     )
   ),
   inputDecorationTheme: InputDecorationTheme(
-    fillColor: const Color(0xFF393a3c),
-    errorStyle: const TextStyle(
-      color: Color(0xffed5565)
+    contentPadding: const EdgeInsets.all(kPadding * 2),
+    labelStyle: const TextStyle(
+      color: Color(0xFF326ec8),
+      fontSize: 20,
+      fontWeight: FontWeight.bold
     ),
+    floatingLabelBehavior: FloatingLabelBehavior .always,
+    hintStyle: const TextStyle(
+      color: Color(0xFF8b8b8b)
+    ),
+    fillColor: const Color(0xFFFAFAFA),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(kBorderRadius),
+      borderSide: const BorderSide(
+        color:Color(0xFF8b8b8b)
+      ),
+    ),
+    enabledBorder:OutlineInputBorder(
+      borderRadius: BorderRadius.circular(kBorderRadius),
+      borderSide: const BorderSide(
+        color:Color(0xFF8b8b8b)
+      )
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(kBorderRadius),
       borderSide: const BorderSide(
-        width: 0.8,
-        color: Color(0xfff1f2f6),
+        color: Color(0xFF326ec8)
       ),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(kBorderRadius),
       borderSide: const BorderSide(
-        width: 0.8,
         color: Color(0xffed5565),
       ),
     ),
     focusedErrorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(kBorderRadius),
       borderSide: const BorderSide(
-        width: 0.8,
         color: Color(0xffed5565),
       ),
+    ),
+    errorStyle: const TextStyle(
+      fontSize: 14,
+      color
+      : Color(0xffed5565),
     ),
   ),
   textTheme: const TextTheme(
@@ -79,6 +97,10 @@ final theme = ThemeData(
     labelSmall: TextStyle(
       fontSize: 12,
       color: Color(0xFFABABAB),
+    ),
+    bodyMedium: TextStyle(
+      fontSize: 16,
+      color:  Color(0xff242424),
     ),
   ),
 );

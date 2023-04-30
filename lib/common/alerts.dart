@@ -1,6 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:task_list/config/app_theme.dart';
+import '/config/app_theme.dart';
 
 class Alerts{
 

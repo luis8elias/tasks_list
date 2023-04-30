@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart' show Widget;
+import 'package:flutter/material.dart' show Widget, UniqueKey;
 import 'package:go_router/go_router.dart';
+import '/presentation/task/create/create_task_screen.dart';
 import '/presentation/task/list/task_list_screen.dart';
 
 GoRoute _goRouteNamed({
@@ -10,7 +11,13 @@ GoRoute _goRouteNamed({
   return GoRoute(
     name: name,
     path: name,
-    builder: (context, state) => screen,
+    pageBuilder: (context, state) {
+      return CustomTransitionPage<void>(
+        key: UniqueKey(),
+        child: screen,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) => child
+      );
+    },
     routes: routes,
   );
 }
@@ -20,6 +27,12 @@ final routes = [
   _goRouteNamed(
     name: TaskListScreen.routeName,
     screen: const TaskListScreen(),
+    routes: [
+      _goRouteNamed(
+        name: CreateTaskScreen.routeName,
+        screen: const CreateTaskScreen(),
+      ),
+    ]
   ),
 
 ];

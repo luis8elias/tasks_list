@@ -12,7 +12,7 @@ class TaskApiRepository extends ITaskRepository{
   Future<ApiResponse<List<TaskEntity>?>> getList() async{
     
     try {
-     
+      log('✌ consultando api');
       final response = await dioInstance.get(
         '/tasks-challenge/tasks',
       );

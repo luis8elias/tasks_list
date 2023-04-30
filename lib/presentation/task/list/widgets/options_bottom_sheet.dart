@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:task_list/config/app_theme.dart';
-import 'package:task_list/presentation/task/list/providers/delete_task_provider.dart';
-import 'package:task_list/presentation/task/list/widgets/delete_task_dialog.dart';
+import '/config/app_theme.dart';
+import '/presentation/task/list/providers/delete_task_provider.dart';
+import '/presentation/task/list/widgets/delete_task_dialog.dart';
 
 import '/config/size_constants.dart';
 

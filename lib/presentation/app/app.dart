@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '/config/app_constants.dart';
 import '/config/app_theme.dart';
@@ -12,6 +13,11 @@ class App extends StatelessWidget {
     return MaterialApp.router(
       title: nameApp ?? 'Nombre no disponible',
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+      supportedLocales: const [Locale('es')],
       theme: theme,
       routerConfig: goRouter,
     );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:task_list/presentation/task/list/providers/delete_task_provider.dart';
-import '/presentation/task/list/widgets/options_bottom_sheet.dart';
 
+import '/presentation/task/list/providers/delete_task_provider.dart';
+import '/presentation/task/list/widgets/options_bottom_sheet.dart';
 import '/presentation/shared/custom_checkbox.dart';
 import '/config/size_constants.dart';
 import '/domain/entities/task_entity.dart';
@@ -38,7 +38,12 @@ class TaskTile extends StatelessWidget {
                     decoration: task.isCompletedAsBool ? TextDecoration.lineThrough : null
                   ),
                 ),
-                CustomCheckBox(isCheked: task.isCompletedAsBool)
+                CustomCheckBox(
+                  isCheked: task.isCompletedAsBool,
+                  onChanged: (value) {
+                    
+                  },
+                )
               ],
             ),
             Divider(

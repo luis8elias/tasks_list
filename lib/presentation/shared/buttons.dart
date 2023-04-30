@@ -22,6 +22,11 @@ class ButtonWithIcon extends StatelessWidget {
         overlayColor: MaterialStatePropertyAll(
           Theme.of(context).primaryColor.withOpacity(0.2)
         ),
+        padding: const MaterialStatePropertyAll(
+          EdgeInsets.symmetric(
+            horizontal: kPadding * 3
+          )
+        ),
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(kBorderRadius)
