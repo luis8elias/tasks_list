@@ -56,5 +56,10 @@ class CreateTaskProivder extends ChangeNotifier {
 
   }
 
+  void resetStatus(){
+    status = CreateTaskStatus.initial;
+    message = '';
+  }
+
  
 }

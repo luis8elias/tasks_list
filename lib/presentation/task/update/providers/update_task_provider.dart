@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/data/models/api_response.dart';
+
 import '/domain/repositories/i_task_repository.dart';
 
 enum UpdateTaskStatus{
@@ -57,6 +57,11 @@ class UpdateTaskProvider extends ChangeNotifier {
     message = updateTaskResp.detail!;
     _emitStatus(UpdateTaskStatus.success);
 
+  }
+
+  void resetStatus(){
+    status = UpdateTaskStatus.initial;
+    message = '';
   }
  
 }

@@ -51,7 +51,6 @@ class OptionsBottomSheet extends StatelessWidget {
                 height: kPadding * 2,
               ),
               ListTile(
-                enableFeedback: true,
                 onTap: (){
                   Navigator.of(context).pop();
                   showDialog<void>(
@@ -77,7 +76,6 @@ class OptionsBottomSheet extends StatelessWidget {
                 ),
               ),
               ListTile(
-                enableFeedback: true,
                 onTap: (){
                   Navigator.of(context).pop();
                    GoRouter.of(context).go(
@@ -92,14 +90,13 @@ class OptionsBottomSheet extends StatelessWidget {
                   color:  Theme.of(context).primaryColorDark,
                 ),
                 title: Text(
-                  'Editar',
+                  'Actulizar',
                   style: Theme.of(context).textTheme.labelMedium!.copyWith(
                     color: Theme.of(context).primaryColorDark
                   )
                 ),
               ),
               ListTile(
-                enableFeedback: true,
                 onTap: () => Navigator.pop(context),
                 leading: Icon(
                   Icons.close,

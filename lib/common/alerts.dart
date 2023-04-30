@@ -1,5 +1,5 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:task_list/config/size_constants.dart';
 import '/config/app_theme.dart';
 
 class Alerts{
@@ -8,35 +8,48 @@ class Alerts{
     required BuildContext context,
     required String message
   }){
-    Flushbar(
-      message : message,
-      icon: Icon(
-        Icons.check,
-        color: Theme.of(context).primaryColorLight,
-      ),
-      flushbarStyle: FlushbarStyle.GROUNDED,
-      backgroundColor: Theme.of(context).primaryColor,
-      flushbarPosition: FlushbarPosition.TOP,
-      duration: const  Duration(seconds: 3),
-    ).show(context);
 
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        padding: const EdgeInsets.all(
+          kPadding * 3
+        ),
+        content: Row(
+          children: [
+            Icon(
+              Icons.check,
+              color: Theme.of(context).primaryColorLight,
+            ),
+            const SizedBox(width: kPadding),
+            Text(message)
+          ],
+        ),
+        backgroundColor: Theme.of(context).primaryColor,
+      )
+    );
   }
 
   static void showFailed({
     required BuildContext context,
     required String message
   }){
-    Flushbar(
-      message : message,
-      icon: Icon(
-        Icons.error,
-        color: Theme.of(context).primaryColorLight,
-      ),
-      flushbarStyle: FlushbarStyle.GROUNDED,
-      backgroundColor: StatusColors.error,
-      flushbarPosition: FlushbarPosition.TOP,
-      duration: const  Duration(seconds: 3),
-    ).show(context);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+         padding: const EdgeInsets.all(
+          kPadding * 2
+        ),
+        content: Row(
+          children: [
+            Icon(
+              Icons.error,
+              color: Theme.of(context).primaryColorLight,
+            ),
+            Text(message)
+          ],
+        ),
+        backgroundColor: StatusColors.error,
+      )
+    );
 
   }
 }

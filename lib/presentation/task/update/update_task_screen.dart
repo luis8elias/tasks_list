@@ -69,7 +69,7 @@ class UpdateTaskScreenBuilder extends StatelessWidget {
         ),
         title: FadeIn(
           child: Text(
-            'Editar tarea',
+            'Actulizar tarea',
             style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
@@ -112,8 +112,9 @@ class UpdateTaskScreenUI extends StatelessWidget {
           WidgetsBinding.instance.addPostFrameCallback((_) {
 
             
-            Alerts.showSuccess(context: context, message: prov.message);
             GoRouter.of(context).replace(TaskListScreen.routeName);
+            Alerts.showSuccess(context: context, message: prov.message);
+            context.read<UpdateTaskProvider>().resetStatus();
             
           });
 

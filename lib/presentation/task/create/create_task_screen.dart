@@ -8,7 +8,6 @@ import '/common/alerts.dart';
 import '/presentation/shared/loader_widget.dart';
 import '/presentation/task/create/providers/create_task_proivder.dart';
 import '/presentation/task/list/task_list_screen.dart';
-
 import '/config/size_constants.dart';
 import '/presentation/shared/task_from.dart';
 
@@ -42,8 +41,11 @@ class CreateTaskScreenListener extends StatelessWidget {
         if(prov.status  == CreateTaskStatus.success){
 
           WidgetsBinding.instance.addPostFrameCallback((_) {
+
             GoRouter.of(context).replace(TaskListScreen.routeName);
             Alerts.showSuccess(context: context, message: prov.message);
+            context.read<CreateTaskProivder>().resetStatus();
+            
           });
           
         }

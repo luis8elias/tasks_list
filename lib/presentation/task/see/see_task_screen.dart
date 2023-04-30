@@ -9,7 +9,6 @@ import '/domain/entities/task_detailed_entity.dart';
 import '/presentation/shared/custom_checkbox.dart';
 import '/presentation/shared/loader_widget.dart';
 import '/presentation/shared/providers/fetch_task_by_id_provider.dart';
-import '/presentation/task/list/task_list_screen.dart';
 import '/presentation/task/see/widgets/tag_item.dart';
 
 class SeeTaskScreen extends StatelessWidget {
