@@ -90,7 +90,7 @@ class OptionsBottomSheet extends StatelessWidget {
                   color:  Theme.of(context).primaryColorDark,
                 ),
                 title: Text(
-                  'Actulizar',
+                  'Actualizar',
                   style: Theme.of(context).textTheme.labelMedium!.copyWith(
                     color: Theme.of(context).primaryColorDark
                   )

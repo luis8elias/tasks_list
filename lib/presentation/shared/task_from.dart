@@ -112,30 +112,22 @@ class _TaskFormState extends State<TaskForm> {
               const SizedBox(
                 height: kPadding,
               ),
-              GestureDetector(
-                onTap: () {
-                  _showDatePicker(
-                    context: context,
-                    initalValue: widget.task != null ?  widget.task!.dueDate : null
-                  );
-                },
-                child: Row(
-                  children: [
-                    CustomCheckBox(
-                      isCheked: isCompleted,
-                      onChanged: (value) {
-                        isCompleted = value;
-                      },
-                    ),
-                    const SizedBox(
-                      width: kPadding,
-                    ),
-                    Text(
-                      'Marcar tarea como completada',
-                      style:Theme.of(context).textTheme.bodyMedium,
-                    )
-                  ],
-                ),
+              Row(
+                children: [
+                  CustomCheckBox(
+                    isCheked: isCompleted,
+                    onChanged: (value) {
+                      isCompleted = value;
+                    },
+                  ),
+                  const SizedBox(
+                    width: kPadding,
+                  ),
+                  Text(
+                    'Marcar tarea como completada',
+                    style:Theme.of(context).textTheme.bodyMedium,
+                  )
+                ],
               ),
               const SizedBox(
                 height: kPadding * 2,
@@ -145,14 +137,29 @@ class _TaskFormState extends State<TaskForm> {
                   Expanded(
                     flex: 5,
                     child: GenericInput(
+                      onTap: () {
+                        _showDatePicker(
+                          context: context,
+                          initalValue: widget.task != null ?  widget.task!.dueDate : null
+                        );
+                      },
                       label: 'Fecha de vencimiento',
                       hintText: 'Seleccione la fecha',
                       controller: dueDateController,
                       readOnly: true,
                     ),
                   ),
-                  const Expanded(
-                    child: Icon(Icons.calendar_month)
+                   Expanded(
+                    child: IconButton(
+                      splashRadius: 25,
+                      onPressed: () {
+                        _showDatePicker(
+                          context: context,
+                          initalValue: widget.task != null ?  widget.task!.dueDate : null
+                        );
+                      },
+                      icon: const Icon(Icons.calendar_month)
+                    )
                   )
                 ],
               ),
@@ -161,7 +168,7 @@ class _TaskFormState extends State<TaskForm> {
               ),
               GenericInput(
                 label: 'Comentarios',
-                hintText: 'Escriba comentarios',
+                hintText: 'Agregue comentarios',
                 controller: commentsController,
               ),
               const SizedBox(
@@ -169,7 +176,7 @@ class _TaskFormState extends State<TaskForm> {
               ),
               GenericInput(
                 label: 'Descricpión',
-                hintText: 'Escriba una descripción',
+                hintText: 'Agregue una descripción',
                 controller: descriptionController,
               ),
               const SizedBox(
@@ -177,7 +184,7 @@ class _TaskFormState extends State<TaskForm> {
               ),
               GenericInput(
                 label: 'Tags',
-                hintText: 'Escriba tags',
+                hintText: 'Agregue tags',
                 controller: tagsController,
               ),
               const SizedBox(

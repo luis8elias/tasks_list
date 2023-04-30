@@ -69,7 +69,7 @@ class UpdateTaskScreenBuilder extends StatelessWidget {
         ),
         title: FadeIn(
           child: Text(
-            'Actulizar tarea',
+            'Actualizar tarea',
             style: Theme.of(context).textTheme.titleMedium,
           ),
         ),
