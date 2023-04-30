@@ -42,7 +42,7 @@ class CreateTaskScreenListener extends StatelessWidget {
         if(prov.status  == CreateTaskStatus.success){
 
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            Navigator.of(context).popUntil((r) => true);
+            Navigator.pop(context);
             Alerts.showSuccess(context: context, message: prov.message);
             //GoRouter.of(context).go(TaskListScreen.routeName);
           });
@@ -69,7 +69,6 @@ class CreateTaskScreenUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<CreateTaskProivder>().resetStatus();
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,

@@ -5,15 +5,15 @@ import 'package:go_router/go_router.dart';
 import '/presentation/task/create/create_task_screen.dart';
 import '/presentation/shared/buttons.dart';
 
-class NewTaskButton extends StatelessWidget {
-  const NewTaskButton({super.key});
+class CreateTaskButton extends StatelessWidget {
+  const CreateTaskButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return FadeIn(
       child: ButtonWithIcon(
         icon: Icons.add,
-        text: 'Nueva Tarea',
+        text: 'Crear Tarea',
         onPressed: (){
           GoRouter.of(context).goNamed(
             CreateTaskScreen.routeName
