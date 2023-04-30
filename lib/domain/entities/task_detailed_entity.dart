@@ -20,6 +20,18 @@ class TaskDetailedEntity extends  TaskEntity{
     this.updatedAt,
   });
 
+  List<String> getTagsList(){
+    try {
+      if(tags!.isEmpty){
+        return [];
+      }
+      final tagsList = tags?.split(',');
+      return tagsList ?? [tags!];
+    } catch (e) {
+      return  tags == null ? [] : [tags!];
+    }
+  }
+
   factory TaskDetailedEntity.fromJson(Map<String, dynamic> json) {
 
     final isCompletedFromJson = json["is_completed"];

@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injector/injector.dart';
 import 'package:provider/provider.dart';
-import 'package:task_list/config/size_constants.dart';
-import 'package:task_list/domain/entities/task_detailed_entity.dart';
-import 'package:task_list/presentation/shared/custom_checkbox.dart';
-import 'package:task_list/presentation/shared/loader_widget.dart';
-import 'package:task_list/presentation/shared/providers/fetch_task_by_id_provider.dart';
-import 'package:task_list/presentation/task/list/task_list_screen.dart';
+
+import '/config/size_constants.dart';
+import '/domain/entities/task_detailed_entity.dart';
+import '/presentation/shared/custom_checkbox.dart';
+import '/presentation/shared/loader_widget.dart';
+import '/presentation/shared/providers/fetch_task_by_id_provider.dart';
+import '/presentation/task/list/task_list_screen.dart';
+import '/presentation/task/see/widgets/tag_item.dart';
 
 class SeeTaskScreen extends StatelessWidget {
 
@@ -87,6 +89,8 @@ class SeeTaskScreenUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return ListView(
       padding: const EdgeInsets.symmetric(
         horizontal: kPadding
@@ -188,12 +192,18 @@ class SeeTaskScreenUI extends StatelessWidget {
             color: Theme.of(context).hintColor
           ),
         ),
+        taskDetailed.getTagsList().isEmpty ?
         Text(
           taskDetailed.tags ?? 'Sin tags',
           style: Theme.of(context).textTheme.labelLarge!.copyWith(
             fontSize: 20
           ),
-        ),
+        ):
+        Wrap(
+          children: taskDetailed.getTagsList().map(
+            (tag) => TagItem(label: tag)
+          ).toList(),
+        )
       ],
     );
   }
