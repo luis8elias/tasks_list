@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:task_list/presentation/task/see/see_task_screen.dart';
 import '/presentation/task/list/providers/task_list_provider.dart';
 
 import '/presentation/task/list/widgets/options_bottom_sheet.dart';
@@ -24,6 +26,14 @@ class TaskTile extends StatelessWidget {
         right: kPadding
       ),
       child: ListTile(
+        onTap: () {
+          GoRouter.of(context).go(
+            context.namedLocation(
+              SeeTaskScreen.routeName,
+              params: {'tid': task.id.toString()}
+            )
+          );
+        },
         contentPadding: const EdgeInsets.all(kPadding),
         tileColor: Theme.of(context).primaryColorLight,
         title: Column(
@@ -40,9 +50,7 @@ class TaskTile extends StatelessWidget {
                 ),
                 CustomCheckBox(
                   isCheked: task.isCompletedAsBool,
-                  onChanged: (value) {
-                    
-                  },
+                  readonly: true,
                 )
               ],
             ),

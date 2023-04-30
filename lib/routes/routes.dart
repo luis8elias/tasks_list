@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:task_list/presentation/task/see/see_task_screen.dart';
 
 import '/presentation/task/update/update_task_screen.dart';
 import '/presentation/task/create/create_task_screen.dart';
@@ -22,6 +23,13 @@ final routes = [
         path: UpdateTaskScreen.routeName,
         name: UpdateTaskScreen.routeName,
         builder: (context, state) => UpdateTaskScreen(
+          taskId:  int.parse(state.params['tid']!),
+        ),
+      ),
+      GoRoute(
+        path: SeeTaskScreen.routeName,
+        name: SeeTaskScreen.routeName,
+        builder: (context, state) => SeeTaskScreen(
           taskId:  int.parse(state.params['tid']!),
         ),
       ),

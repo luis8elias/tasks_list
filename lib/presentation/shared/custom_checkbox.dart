@@ -7,11 +7,13 @@ class CustomCheckBox extends StatefulWidget {
   const CustomCheckBox({
     super.key,
     required this.isCheked,
-    required this.onChanged
+    this.onChanged,
+    this.readonly = false
   });
 
   final bool isCheked;
-  final void Function(bool value) onChanged;
+  final void Function(bool value)? onChanged;
+  final bool readonly;
 
   @override
   State<CustomCheckBox> createState() => _CustomCheckBoxState();
@@ -30,11 +32,13 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(kBorderRadius),
-      onTap: (){
+      onTap: widget.readonly ? null : (){
         setState(() {
           value = !value;
         });
-        widget.onChanged(value);
+        if(widget.onChanged != null){
+          widget.onChanged!(value);
+        }
         
       },
       child: Padding(
