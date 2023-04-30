@@ -1,8 +1,7 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:task_list/common/alerts.dart';
 
+import '/common/alerts.dart';
 import '/config/app_theme.dart';
 import '/config/size_constants.dart';
 import '/presentation/shared/loader_widget.dart';
