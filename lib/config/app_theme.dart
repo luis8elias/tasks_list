@@ -10,10 +10,10 @@ final theme = ThemeData(
   primaryColor: const Color(0xff0661F1),
   hintColor: const Color(0xFFABABAB),
   colorScheme: const ColorScheme.light(
-    primary: Color(0xfff1f2f6),
+    primary: Color(0xff0661F1),
     secondary: Color(0xff242424),
     background: Color(0xffF9F9F9),
-    onSecondary: Color(0xffbdd6ff)
+    onSecondary: Color(0xff0661F1)
   ),
   scaffoldBackgroundColor: const Color(0xffF9F9F9),
   textSelectionTheme: const TextSelectionThemeData(

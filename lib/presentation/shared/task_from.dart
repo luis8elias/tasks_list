@@ -76,14 +76,14 @@ class _TaskFormState extends State<TaskForm> {
     super.dispose();
   }
 
-  Future<void> _showDatePicker(BuildContext context) async{
+  Future<void> _showDatePicker({required BuildContext context , String? initalValue}) async{
     final atualYear = DateTime.now().year;
     final result = await showDatePicker(
       context: context,
       initialEntryMode: DatePickerEntryMode.calendarOnly,
-      initialDate: DateTime.now(),
+      initialDate: initalValue != null ? DateTime.parse(initalValue) : DateTime.now(),
       firstDate: DateTime(atualYear-40),
-      lastDate: DateTime.now()
+      lastDate: DateTime(atualYear+20)
     );
     final formatter = DateFormat('yyyy-MM-dd');
     if(result != null){
@@ -112,22 +112,30 @@ class _TaskFormState extends State<TaskForm> {
               const SizedBox(
                 height: kPadding,
               ),
-              Row(
-                children: [
-                  CustomCheckBox(
-                    isCheked: isCompleted,
-                    onChanged: (value) {
-                      isCompleted = value;
-                    },
-                  ),
-                  const SizedBox(
-                    width: kPadding,
-                  ),
-                  Text(
-                    'Marcar tarea como completada',
-                    style:Theme.of(context).textTheme.bodyMedium,
-                  )
-                ],
+              GestureDetector(
+                onTap: () {
+                  _showDatePicker(
+                    context: context,
+                    initalValue: widget.task != null ?  widget.task!.dueDate : null
+                  );
+                },
+                child: Row(
+                  children: [
+                    CustomCheckBox(
+                      isCheked: isCompleted,
+                      onChanged: (value) {
+                        isCompleted = value;
+                      },
+                    ),
+                    const SizedBox(
+                      width: kPadding,
+                    ),
+                    Text(
+                      'Marcar tarea como completada',
+                      style:Theme.of(context).textTheme.bodyMedium,
+                    )
+                  ],
+                ),
               ),
               const SizedBox(
                 height: kPadding * 2,
@@ -141,9 +149,6 @@ class _TaskFormState extends State<TaskForm> {
                       hintText: 'Seleccione la fecha',
                       controller: dueDateController,
                       readOnly: true,
-                      onTap: () {
-                        _showDatePicker(context);
-                      },
                     ),
                   ),
                   const Expanded(
