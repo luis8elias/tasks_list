@@ -98,15 +98,30 @@ class TaskApiRepository extends ITaskRepository{
 
       final params = {
         'title': title,
-        'is_completed': isCompleted ? 1 : 0,
-        'comments' : comments!.isEmpty ? null : comments,
-        'description' : description!.isEmpty ? null : description,
-        'tags' : tags!.isEmpty ? null : tags
+        'is_completed': isCompleted ? 1 : 0
       };
 
       if(dueDate!.isNotEmpty){
         params.addAll({
           'due_date' : dueDate
+        });
+      }
+
+      if(comments!.isNotEmpty){
+        params.addAll({
+          'comments' : comments
+        });
+      }
+
+      if(description!.isNotEmpty){
+        params.addAll({
+          'description' : description,
+        });
+      }
+
+      if(tags!.isNotEmpty){
+        params.addAll({
+          'tags' : tags,
         });
       }
 
@@ -195,15 +210,30 @@ class TaskApiRepository extends ITaskRepository{
 
       final params = {
         'title': title,
-        'is_completed': isCompleted ? 1 : 0,
-        'comments' : comments!.isEmpty ? null : comments,
-        'description' : description!.isEmpty ? null : description,
-        'tags' : tags!.isEmpty ? null : tags
+        'is_completed': isCompleted ? 1 : 0
       };
 
       if(dueDate!.isNotEmpty){
         params.addAll({
           'due_date' : dueDate
+        });
+      }
+
+      if(comments!.isNotEmpty){
+        params.addAll({
+          'comments' : comments
+        });
+      }
+
+      if(description!.isNotEmpty){
+        params.addAll({
+          'description' : description,
+        });
+      }
+
+      if(tags!.isNotEmpty){
+        params.addAll({
+          'tags' : tags,
         });
       }
 
