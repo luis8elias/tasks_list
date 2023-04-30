@@ -12,7 +12,7 @@ class Alerts{
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         padding: const EdgeInsets.all(
-          kPadding * 3
+          kPadding * 2
         ),
         content: Row(
           children: [
@@ -35,7 +35,7 @@ class Alerts{
   }){
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-         padding: const EdgeInsets.all(
+        padding: const EdgeInsets.all(
           kPadding * 2
         ),
         content: Row(

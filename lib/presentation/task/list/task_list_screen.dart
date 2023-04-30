@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:injector/injector.dart';
 import 'package:provider/provider.dart';
+import 'package:task_list/presentation/task/list/widgets/empty_task_list_indicator.dart';
 
 import '/presentation/task/list/widgets/task_tile.dart';
 import '/presentation/task/list/widgets/tasks_tab_bar.dart';
@@ -67,6 +68,12 @@ class TaskListScreenBuilder extends StatelessWidget {
           
                 if(prov.status == TaskListStatus.failed){
                   return Center(child: Text(prov.message));
+                }
+
+                if(prov.filteredTasks.isEmpty){
+                  return EmptyTaskListIndicator(
+                    taskFilter: prov.taskFilter,
+                  );
                 }
                 
                 return const TaskListScreenUI();

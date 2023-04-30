@@ -10,9 +10,12 @@ enum TaskListStatus{
 }
 
 enum TaskFilter{
-  all,
-  completed,
-  notCompleted
+  all('tareas'),
+  completed('tareas completadas'),
+  notCompleted('tareas no completadas');
+
+  const TaskFilter(this.textValue);
+  final String textValue;
 }
 
 class TaskListProvider with ChangeNotifier {
