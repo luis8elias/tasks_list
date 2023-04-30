@@ -2,6 +2,9 @@
 
 ## Getting Started.
 
+#### Flutter version
+`3.7.12`
+
 Run this command :
 
 `flutter pub get`
