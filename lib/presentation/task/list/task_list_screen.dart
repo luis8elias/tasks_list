@@ -7,7 +7,7 @@ import '/presentation/task/list/widgets/task_tile.dart';
 import '/presentation/task/list/widgets/tasks_tab_bar.dart';
 import '/config/size_constants.dart';
 import '/presentation/shared/loader_widget.dart';
-import '/presentation/task/list/widgets/new_task_button.dart';
+import 'widgets/create_task_button.dart';
 import '/presentation/task/list/providers/task_list_provider.dart';
 
 class TaskListScreen extends StatelessWidget {
@@ -50,7 +50,7 @@ class TaskListScreenBuilder extends StatelessWidget {
             padding: EdgeInsets.only(
               right: kPadding
             ),
-            child: NewTaskButton(),
+            child: CreateTaskButton(),
           )
         ],
       ),
@@ -99,6 +99,7 @@ class TaskListScreenUI extends StatelessWidget {
           itemBuilder: (context, index) {
             final tasks = context.read<TaskListProvider>().filteredTasks;
             return  TaskTile(
+              key: ValueKey(tasks[index].id),
               task: tasks[index],
             );
           },

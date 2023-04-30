@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -47,6 +49,7 @@ class _TaskFormState extends State<TaskForm> {
   @override
   void initState() {
     super.initState();
+    log('Dibujando form');
     titleController = TextEditingController(
       text: widget.task != null ?  widget.task!.title : ''
     );
