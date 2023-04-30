@@ -1,6 +1,7 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:task_list/common/alerts.dart';
 
 import '/config/app_theme.dart';
 import '/config/size_constants.dart';
@@ -24,39 +25,20 @@ class DeleteTaskDialog extends StatelessWidget {
         if(prov.status  == DeleteTaskStatus.success){
 
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            Flushbar(
-              message : prov.message,
-              icon: Icon(
-                Icons.check,
-                color: Theme.of(context).primaryColorLight,
-              ),
-              flushbarStyle: FlushbarStyle.GROUNDED,
-              backgroundColor: StatusColors.success,
-              flushbarPosition: FlushbarPosition.TOP,
-              duration: const  Duration(seconds: 3),
-            ).show(context);
+            Alerts.showSuccess(context: context, message: prov.message);
           });
-
           Navigator.of(context).pop();
           return const SizedBox.shrink();
         }
+        
         if(prov.status  == DeleteTaskStatus.failed){
 
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            Flushbar(
-              message : prov.message,
-              icon: Icon(
-                Icons.error,
-                color: Theme.of(context).primaryColorLight,
-              ),
-              flushbarStyle: FlushbarStyle.GROUNDED,
-              backgroundColor: StatusColors.error,
-              flushbarPosition: FlushbarPosition.TOP,
-              duration: const  Duration(seconds: 3),
-            ).show(context);
+           Alerts.showFailed(context: context, message: prov.message);
           });
           Navigator.of(context).pop();
           return const SizedBox.shrink();
+
         }
 
         return AlertDialog(
@@ -143,7 +125,6 @@ class DeleteTaskDialogButton extends StatelessWidget {
         overlayColor: MaterialStatePropertyAll(
           Theme.of(context).highlightColor
         ),
-       
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(kBorderRadius)
