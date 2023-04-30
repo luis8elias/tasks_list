@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -117,9 +115,9 @@ class _TaskFormState extends State<TaskForm> {
               Row(
                 children: [
                   CustomCheckBox(
-                    isCheked: false,
+                    isCheked: isCompleted,
                     onChanged: (value) {
-                      
+                      isCompleted = value;
                     },
                   ),
                   const SizedBox(

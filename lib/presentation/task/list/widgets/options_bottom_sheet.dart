@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import '/config/app_theme.dart';
-import '/presentation/task/list/providers/delete_task_provider.dart';
-import '/presentation/task/list/widgets/delete_task_dialog.dart';
 
+import '/presentation/task/list/providers/task_list_provider.dart';
+import '/presentation/task/delete/delete_task_dialog.dart';
+import '/presentation/task/update/update_task_screen.dart';
+import '/config/app_theme.dart';
 import '/config/size_constants.dart';
 
 
@@ -49,6 +51,7 @@ class OptionsBottomSheet extends StatelessWidget {
                 height: kPadding * 2,
               ),
               ListTile(
+                enableFeedback: true,
                 onTap: (){
                   Navigator.of(context).pop();
                   showDialog<void>(
@@ -56,7 +59,7 @@ class OptionsBottomSheet extends StatelessWidget {
                     barrierDismissible: false,
                     builder: (BuildContext context2) {
                       return ChangeNotifierProvider.value(
-                        value: context.read<DeleteTaskPrivider>()..resetStatus(),
+                        value: context.read<TaskListProvider>(),
                         child: DeleteTaskDialog(taskId: taskId)
                       );
                     },
@@ -74,6 +77,29 @@ class OptionsBottomSheet extends StatelessWidget {
                 ),
               ),
               ListTile(
+                enableFeedback: true,
+                onTap: (){
+                  Navigator.of(context).pop();
+                   GoRouter.of(context).go(
+                    context.namedLocation(
+                      UpdateTaskScreen.routeName,
+                      params: {'tid': taskId.toString()}
+                    )
+                  );
+                },
+                leading:  Icon(
+                  Icons.edit,
+                  color:  Theme.of(context).primaryColorDark,
+                ),
+                title: Text(
+                  'Editar',
+                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                    color: Theme.of(context).primaryColorDark
+                  )
+                ),
+              ),
+              ListTile(
+                enableFeedback: true,
                 onTap: () => Navigator.pop(context),
                 leading: Icon(
                   Icons.close,

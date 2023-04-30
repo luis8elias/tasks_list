@@ -42,8 +42,9 @@ class CreateTaskScreenListener extends StatelessWidget {
         if(prov.status  == CreateTaskStatus.success){
 
           WidgetsBinding.instance.addPostFrameCallback((_) {
+            Navigator.of(context).popUntil((r) => true);
             Alerts.showSuccess(context: context, message: prov.message);
-            GoRouter.of(context).go(TaskListScreen.routeName);
+            //GoRouter.of(context).go(TaskListScreen.routeName);
           });
           
         }
@@ -52,7 +53,6 @@ class CreateTaskScreenListener extends StatelessWidget {
 
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Alerts.showFailed(context: context, message: prov.message);
-            GoRouter.of(context).go(TaskListScreen.routeName); 
           });
 
         }
@@ -100,7 +100,14 @@ class CreateTaskScreenUI extends StatelessWidget {
           );
         },
         onSave: (title, isCompleted, dueDate, comments, description, tags) {
-          context.read<CreateTaskProivder>().createTask();
+          context.read<CreateTaskProivder>().createTask(
+            title: title,
+            isCompleted: isCompleted,
+            dueDate: dueDate,
+            comments: comments,
+            description: description,
+            tags: tags
+          );
         },
       ),
     );

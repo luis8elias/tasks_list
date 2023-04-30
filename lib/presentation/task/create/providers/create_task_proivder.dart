@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '/data/models/api_response.dart';
 import '/domain/repositories/i_task_repository.dart';
 
 enum CreateTaskStatus{
@@ -25,19 +24,30 @@ class CreateTaskProivder extends ChangeNotifier {
   CreateTaskStatus status = CreateTaskStatus.initial;
   String message = '';
 
-  Future<void> createTask() async {
+  Future<void> createTask({
+    required String title,
+    required bool isCompleted,
+    required String dueDate,
+    required String comments,
+    required String description,
+    required String tags
+  }) async {
 
     _emitStatus(CreateTaskStatus.loading);
-    /* final createTaskResp = await _taskRepository.create(
-      title: title, isCompleted: isCompleted
-    ) */
-    await Future.delayed(const Duration(seconds: 2));
-    final createTaskResp = ApiResponse(success: true, detail: 'Tarea creada con exito');
-
+    final createTaskResp = await _taskRepository.create(
+      title: title, 
+      isCompleted: isCompleted,
+      dueDate: dueDate,
+      comments: comments,
+      description: description,
+      tags: tags
+    );
+    
     if(createTaskResp.isFailed){
 
       message = createTaskResp.detail!;
       _emitStatus(CreateTaskStatus.failed);
+      return;
 
     }
 

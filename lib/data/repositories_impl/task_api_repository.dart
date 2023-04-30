@@ -1,4 +1,8 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 
 import '/common/dio_instances.dart';
 import '/domain/entities/task_entity.dart';
@@ -45,15 +49,101 @@ class TaskApiRepository extends ITaskRepository{
   }
 
   @override
-  Future<ApiResponse<TaskDetailedEntity>> getById({required int taskId}) {
-    // TODO: implement getById
-    throw UnimplementedError();
+  Future<ApiResponse<TaskDetailedEntity>> getById({required int taskId}) async{
+    try {
+      
+      final response = await dioInstance.get(
+        '/tasks-challenge/tasks/$taskId',
+      );
+
+      final responseBody = response.data;
+      if (responseBody is Map<String,dynamic>) {
+
+        return ApiResponse(
+          success: false,
+          detail: responseBody['detail']
+        );
+        
+      } 
+
+      final tasksIterable = responseBody as Iterable;
+      return ApiResponse(
+        success: true,
+        content: TaskDetailedEntity.fromJson(tasksIterable.first),
+      );
+
+    } catch (e) {
+
+      log('🤡 $e');
+      log('🙄 Error [class=TaskApiRepository][method=getById]');
+      return ApiResponse(
+        success: false,
+        detail: e.toString()
+      );
+      
+    }
   }
 
   @override
-  Future<ApiResponse<TaskDetailedEntity>> create({required String title, required bool isCompleted, String? dueDate, String? comments, String? description, String? tags}) {
-    // TODO: implement create
-    throw UnimplementedError();
+  Future<ApiResponse<TaskDetailedEntity>> create({
+    required String title, 
+    required bool isCompleted, 
+    String? dueDate, 
+    String? comments, 
+    String? description, 
+    String? tags
+  }) async {
+
+    try{
+
+      final params = {
+        'title': title,
+        'is_completed': isCompleted ? 1 : 0,
+        'comments' : comments!.isEmpty ? null : comments,
+        'description' : description!.isEmpty ? null : description,
+        'tags' : tags!.isEmpty ? null : tags
+      };
+
+      if(dueDate!.isNotEmpty){
+        params.addAll({
+          'due_date' : dueDate
+        });
+      }
+
+      final response = await dioInstance.post(
+        "/tasks-challenge/tasks",
+        data: jsonEncode(params),
+        options: Options(
+          headers: {
+            HttpHeaders.contentTypeHeader : 'application/x-www-form-urlencoded'
+          }
+        )
+      );
+
+      final responseBody = response.data as Map<String,dynamic>;
+
+      if (responseBody.containsKey('content')) {
+        return ApiResponse(
+          success: false,
+          detail: responseBody['detail'],
+        );
+      }
+      
+      return ApiResponse(
+        success: true,
+        detail: responseBody['detail'],
+        content: TaskDetailedEntity.fromJson(responseBody['task'])
+      );
+      
+
+    } catch (e) {
+      log('🤡 $e');
+      log('🙄 Error [class=TaskApiRepository][method=create]');
+      return ApiResponse(
+        success: false,
+        detail: "Error"
+      );
+    }
   }
 
   @override

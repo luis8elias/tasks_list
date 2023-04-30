@@ -42,7 +42,7 @@ class Interceptors{
       currentData.addAll({
         'token' : apiKey
       });
-      options.data = jsonEncode(apiKey);
+      options.data = currentData;
       
     }else{
 

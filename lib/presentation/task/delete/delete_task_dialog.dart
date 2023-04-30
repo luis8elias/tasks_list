@@ -1,15 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:injector/injector.dart';
 import 'package:provider/provider.dart';
+import '/presentation/task/delete/widgets/delete_task_dialog_button.dart';
+import '/presentation/task/list/providers/task_list_provider.dart';
 
 import '/common/alerts.dart';
 import '/config/app_theme.dart';
 import '/config/size_constants.dart';
 import '/presentation/shared/loader_widget.dart';
-import '/presentation/task/list/providers/delete_task_provider.dart';
-
+import 'providers/delete_task_provider.dart';
 
 class DeleteTaskDialog extends StatelessWidget {
   const DeleteTaskDialog({
+    super.key,
+    required this.taskId
+  });
+
+
+  final int taskId;
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => DeleteTaskPrivider(
+        taskListProvider: context.read<TaskListProvider>(),
+        taskRepository: Injector.appInstance.get()
+      )..resetStatus(),
+      child: DeleteTaskDialogUI(taskId: taskId),
+    );
+  }
+}
+
+
+class DeleteTaskDialogUI extends StatelessWidget {
+  const DeleteTaskDialogUI({
     super.key,
     required this.taskId
   });
@@ -59,7 +83,7 @@ class DeleteTaskDialog extends StatelessWidget {
               child: ListBody(
                 children: <Widget>[
                   SizedBox(
-                    height: 70,
+                    height: 65,
                     child: Consumer<DeleteTaskPrivider>(
                       builder: (context, prov, child) {
                         if (prov.status  == DeleteTaskStatus.loading) {
@@ -83,7 +107,7 @@ class DeleteTaskDialog extends StatelessWidget {
                     color: Theme.of(context).hintColor,
                   ),
                   SizedBox(
-                    height: 70,
+                    height: 65,
                     child: DeleteTaskDialogButton(
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -106,32 +130,3 @@ class DeleteTaskDialog extends StatelessWidget {
   }
 }
 
-class DeleteTaskDialogButton extends StatelessWidget {
-  const DeleteTaskDialogButton({
-    super.key,
-    required this.child, 
-    required this.onPressed
-  });
-
-  final Widget child;
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      style: ButtonStyle(
-        enableFeedback: true,
-        overlayColor: MaterialStatePropertyAll(
-          Theme.of(context).highlightColor
-        ),
-        shape: MaterialStatePropertyAll(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(kBorderRadius)
-          )
-        ),
-      ),
-      onPressed: onPressed,
-      child: child
-    );
-  }
-}

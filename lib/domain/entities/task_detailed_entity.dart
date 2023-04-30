@@ -20,10 +20,13 @@ class TaskDetailedEntity extends  TaskEntity{
     this.updatedAt,
   });
 
-  factory TaskDetailedEntity.fromJson(Map<String, dynamic> json) => TaskDetailedEntity(
+  factory TaskDetailedEntity.fromJson(Map<String, dynamic> json) {
+
+    final isCompletedFromJson = json["is_completed"];
+    return TaskDetailedEntity(
     id: json["id"],
     title: json["title"],
-    isCompleted: json["is_completed"],
+    isCompleted: isCompletedFromJson is int ? isCompletedFromJson : int.parse(isCompletedFromJson),
     dueDate: json["due_date"],
     comments: json["comments"],
     description: json["description"],
@@ -31,6 +34,7 @@ class TaskDetailedEntity extends  TaskEntity{
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
   );
+  }
 
   @override
   Map<String, dynamic> toJson() => {

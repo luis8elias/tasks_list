@@ -24,7 +24,8 @@ class ButtonWithIcon extends StatelessWidget {
         ),
         padding: const MaterialStatePropertyAll(
           EdgeInsets.symmetric(
-            horizontal: kPadding * 3
+            horizontal: kPadding * 3,
+            vertical: kPadding * 2
           )
         ),
         shape: MaterialStatePropertyAll(

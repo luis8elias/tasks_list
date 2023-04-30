@@ -4,7 +4,6 @@ import 'package:injector/injector.dart';
 import 'package:provider/provider.dart';
 
 import '/presentation/task/list/widgets/task_tile.dart';
-import '/presentation/task/list/providers/delete_task_provider.dart';
 import '/presentation/task/list/widgets/tasks_tab_bar.dart';
 import '/config/size_constants.dart';
 import '/presentation/shared/loader_widget.dart';
@@ -18,22 +17,11 @@ class TaskListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => TaskListProvider(
-            taskRepository: Injector.appInstance.get()
-          )..fetchTaskList(),
-        ),
 
-        ChangeNotifierProvider(
-          create: (context) => DeleteTaskPrivider(
-            taskListProvider: context.read<TaskListProvider>(),
-            taskRepository: Injector.appInstance.get()
-          ),
-        )
-
-      ],
+    return ChangeNotifierProvider(
+      create: (context) => TaskListProvider(
+        taskRepository: Injector.appInstance.get()
+      )..fetchTaskList(),
       child: const TaskListScreenBuilder(),
     );
   }
